@@ -1,0 +1,19 @@
+# Temp files
+**/*.pyc
+**/*.log
+
+# Build files
+dist/
+build/
+*.egg-info
+*.whl
+
+# virtual env
+venv/
+.venv/
+
+# data files
+filewatcher/data/
+
+#logs files
+filewatcher/logs/

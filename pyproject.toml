@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "filewatcher"
+version = "1.0.0"
+description = "Projet de FileWatcher pour lancement lors de reception de fichier avec parametrages et configuration possible par fichier YAML"
+
+keywords = [
+        "filewatcher", 
+        "watchdog", 
+        "realtime"
+]
+
+classifiers = [
+                "Development Status :: 3 - Alpha", 
+                "Intended Audience :: Developers", 
+                "Topic :: Software Development :: Build Tools", 
+                "License :: OSI Approved :: MIT License", 
+                "Programming Language :: Python :: 2.7"
+]
+
+authors = ["Ibrar ARIF <ibrar.arif@sfr.com>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://gitlab.pic.services.prod/DataTeam/filewatcher"
+homepage = "https://confluence.private.sfr.com/display/SI3CDecisionnelGP/3.9+FileWatcher"
+
+[tool.poetry.dependencies]
+python = "^2.7"
+argh = "^0.26.2"
+certifi = "^2019.9.11"
+chardet = "^3.0.4"
+humanfriendly = "^4.18"
+idna = "^2.8"
+monotonic = "^1.5"
+pathtools = "^0.1.2"
+pyyaml = "^5.1.2"
+tabulate = "^0.8.5"
+urllib3 = "^1.25.6"
+watchdog = "^0.9.0"
+tomlkit = "^0.5.7"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
