@@ -17,14 +17,13 @@ classifiers = [
                 "Programming Language :: Python :: 2.7"
 ]
 
-authors = ["Ibrar ARIF <ibrar.arif@sfr.com>"]
+authors = ["Ibrar ARIF <ibrar95140@gmail.com>"]
 readme = "README.md"
 license = "MIT"
-repository = "https://gitlab.pic.services.prod/DataTeam/filewatcher"
-homepage = "https://confluence.private.sfr.com/display/SI3CDecisionnelGP/3.9+FileWatcher"
+repository = "https://github.com/IbrarMakaveli/FileWatcher"
 
 [tool.poetry.dependencies]
-python = "^2.7"
+python = "^3.6"
 argh = "^0.26.2"
 certifi = "^2019.9.11"
 chardet = "^3.0.4"

@@ -24,7 +24,7 @@ class Daemon(object):
 
         # write pid into a pidfile
         with open(self._pidfile, 'w') as f:
-            print >> f, os.getpid()
+            print(os.getpid(), file=f)
 
     def start(self):
         # if daemon is started throw an error

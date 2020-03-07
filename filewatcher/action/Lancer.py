@@ -2,7 +2,7 @@ from common.FileHandle import FileHandle
 import logging
 import time, datetime, re
 import os, sys, signal
-import Queue as queue
+import queue as queue
 from threading import Thread 
 from common.EventHandlerQueue import EventHandlerQueue
 from common.EventHandlerRestart import EventHandlerRestart

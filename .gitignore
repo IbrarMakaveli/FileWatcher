@@ -17,3 +17,6 @@ filewatcher/data/
 
 #logs files
 filewatcher/logs/
+
+#pid files
+filewatcher/pid/
