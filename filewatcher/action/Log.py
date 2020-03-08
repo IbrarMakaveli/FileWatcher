@@ -16,7 +16,7 @@ class Log(object):
                 with open('{}.{}'.format(self.logfile,self.date.strftime('%Y%m%d'))) as f:
                     print(f.read())
             except IOError:
-                print("[ERROR] Aucune log pour la date du {}".format(self.date.strftime('%Y-%m-%d')))
+                print("[ERROR] Not log found for date {}".format(self.date.strftime('%Y-%m-%d')))
         elif self.all==True:
             with open(self.logfile) as f:
                 print(f.read())

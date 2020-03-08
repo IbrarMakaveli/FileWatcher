@@ -26,41 +26,41 @@ if __name__ == '__main__':
     logfile = os.path.join(config['logs']['path'], config['logs']['defaultFile'])
     
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--version', action='version', version='FileWatcher release v1.0 (Ibrar ARIF)')
+    parser.add_argument('--version', action='version', version='FileWatcher (Ibrar ARIF)')
 
-    subparsers = parser.add_subparsers(description='Liste des actions possibles',dest='action')
+    subparsers = parser.add_subparsers(description='Liste of all actions',dest='action')
     
-    lancer_parser = subparsers.add_parser('lancer', description='Lance le filewatcher')
-    lancer_parser.add_argument('--force', default=False, action='store_true',help='Force la relance du filewatcher si deja actif')
-    lancer_parser.add_argument('-worker', default=config['args']['default']['worker'], action='store',help='Nombre de worker simultane (default : %(default)s )')
+    lancer_parser = subparsers.add_parser('start', description='Start of filewatcher')
+    lancer_parser.add_argument('--force', default=False, action='store_true',help='Force restart of filewatcher if already start')
+    lancer_parser.add_argument('-worker', default=config['args']['default']['worker'], action='store',help='Number of worker for Filewatcher (default : %(default)s )')
     
-    lister_parser = subparsers.add_parser('lister', description='Liste toutes les chemin sur le filewatcher')
-    lister_parser.add_argument('-chemin', nargs='*', help='Chemin rechercher multiple choix possible, Exemple : -chemin /varsoft /parc/ott...')
+    list_parser = subparsers.add_parser('list', description='Liste all path in filewatcher')
+    list_parser.add_argument('-path', nargs='*', help='Path search, multiple choose possible, Example : -path /bin /var/log...')
 
-    ajout_parser = subparsers.add_parser('ajouter', description='Ajout d\'un chemin au filewatcher')
-    ajout_parser.add_argument('chemin', action='store', help='Chemin systeme ou va regarder le filewatcher')
-    ajout_parser.add_argument('command', action='store', help='Commande a lancer')
-    ajout_parser.add_argument('-regex', nargs='?', help="Regex donc le fichier doit correspondre pour le filewatcher (default : '%(default)s' )", dest='file_pattern', default=config['args']['default']['regex'], type=str, action="store")
-    ajout_parser.add_argument('-minsize', nargs='?', help='Taille minimum en size en [B,KB,MB,GB,TB] | par exemple : 10.3MB (default : %(default)s )', dest='min_size', type=str, default=config['args']['default']['minsize'], action="store")
-    ajout_parser.add_argument('-timewait', nargs='?', help='Temps a attendre avant de lancer la command en HH:MM:SS | par exemple : 00:23:00 pour 23 minutes (default : %(default)s )', dest='timewait', type=str, default=config['args']['default']['timewait'], action="store")
+    add_parser = subparsers.add_parser('add', description='Add path to filewatcher')
+    add_parser.add_argument('path', action='store', help='Path systeme to watch')
+    add_parser.add_argument('command', action='store', help='Commande to launch when file found')
+    add_parser.add_argument('-regex', nargs='?', help="Regex of the file must match for filewatcher (default : '%(default)s' )", dest='file_pattern', default=config['args']['default']['regex'], type=str, action="store")
+    add_parser.add_argument('-minsize', nargs='?', help='Size minimum of file [B,KB,MB,GB,TB] | example : 10.3MB (default : %(default)s )', dest='min_size', type=str, default=config['args']['default']['minsize'], action="store")
+    add_parser.add_argument('-timewait', nargs='?', help='Time to wait before launching the command in HH:MM:SS | par exemple : 00:23:00 for 23 minutes (default : %(default)s )', dest='timewait', type=str, default=config['args']['default']['timewait'], action="store")
 
-    modifier_parser = subparsers.add_parser('modifier', description='Modifier un chemin au filewatcher')
-    modifier_parser.add_argument('chemin', action='store', help='Chemin systeme ou va regarder le filewatcher')
-    modifier_parser.add_argument('-regex', nargs='?', help='Regex donc le fichier doit correspondre pour le filewatcher', dest='file_pattern', default=None, type=str, action="store")
-    modifier_parser.add_argument('-minsize', nargs='?', help='Taille minimum en size en [B,KB,MB,GB,TB], par exemple : 10.3MB', dest='min_size', type=str, default=None, action="store")
-    modifier_parser.add_argument('-command', nargs='?', help='Commande a lancer', dest='command', type=str, default=None, action="store")
-    modifier_parser.add_argument('-timewait', nargs='?', help='Temps a attendre avant de lancer la command en HH:MM:SS | par exemple : 00:23:00 pour 23 minutes', dest='timewait', type=str, default=None, action="store")
+    modify_parser = subparsers.add_parser('modify', description='Modify path to filewatcher')
+    modify_parser.add_argument('path', action='store', help='Path systeme ou va regarder le filewatcher')
+    modify_parser.add_argument('-regex', nargs='?', help='Regex of the file must match for filewatcher', dest='file_pattern', default=None, type=str, action="store")
+    modify_parser.add_argument('-minsize', nargs='?', help='Size minimum of file [B,KB,MB,GB,TB] | example : 10.3MB', dest='min_size', type=str, default=None, action="store")
+    modify_parser.add_argument('-command', nargs='?', help='Commande to launch when file found', dest='command', type=str, default=None, action="store")
+    modify_parser.add_argument('-timewait', nargs='?', help='Time to wait before launching the command in HH:MM:SS | par exemple : 00:23:00 for 23 minutes', dest='timewait', type=str, default=None, action="store")
 
-    supprimer_parser = subparsers.add_parser('supprimer', description='Supprimer un chemin au filewatcher')
-    supprimer_parser.add_argument('chemin', action='store', help='Chemin a supprimer')
+    delete = subparsers.add_parser('delete', description='Delete path to filewatcher')
+    delete.add_argument('path', action='store', help='Path to delete')
     
-    log_paser = subparsers.add_parser('log', description='Affiche la log en fil continue')
-    log_paser.add_argument('-date', nargs='?', action='store', help='Date de log a afficher (format : YYYY-MM-DD)', default=None, type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d'))
-    log_paser.add_argument('--all', default=False, action='store_true', help='Affiche toute la log depuis le debut de la journee')
+    log_paser = subparsers.add_parser('log', description='Displays the log as a continuous thread')
+    log_paser.add_argument('-date', nargs='?', action='store', help='Date of log to display (format : YYYY-MM-DD)', default=None, type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d'))
+    log_paser.add_argument('--all', default=False, action='store_true', help='Displays all the log since the beginning of the day.')
 
-    statut_paser = subparsers.add_parser('statut', description="Permet de voir l'etat du filewatcher (actif ou non)", add_help=False)
+    status_paser = subparsers.add_parser('status', description="Allows you to see the status of the filewatcher (start or not)", add_help=False)
 
-    stop_paser = subparsers.add_parser('stop', description='Stop le filewatcher si lancer' , add_help=False)
+    stop_paser = subparsers.add_parser('stop', description='Stop the filewatcher if is launch' , add_help=False)
     
     if len(sys.argv)==1:
         print(parser.format_help())
@@ -75,37 +75,37 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     
-    #Log console si pas un lancement
-    if args.action!='lancer':
+    #Log console if is not start
+    if args.action!='start':
         consoleHandler = logging.StreamHandler()
         consoleHandler.setFormatter(logFormatter)
         rootLogger.addHandler(consoleHandler)
 
-    if args.action=='lancer':
+    if args.action=='start':
         Lancer(args,pidfile)
-    elif args.action=='ajouter':
+    elif args.action=='add':
         Ajouter(
-            path_watch=args.chemin,
+            path_watch=args.path,
             file_pattern=args.file_pattern,
             min_size=args.min_size,
             command=args.command,
             timewait=args.timewait
         )
-    elif args.action=='modifier':
+    elif args.action=='modify':
          Modifier(
-            path_watch=args.chemin,
+            path_watch=args.path,
             file_pattern=args.file_pattern,
             min_size=args.min_size,
             command=args.command,
             timewait=args.timewait
         )
-    elif args.action=='supprimer':
-        Supprimer(path_watch=args.chemin)
-    elif args.action=='lister':
-        Lister(list_path_watch=args.chemin)
+    elif args.action=='delete':
+        Supprimer(path_watch=args.path)
+    elif args.action=='list':
+        Lister(list_path_watch=args.path)
     elif args.action=='stop':
         Stop(pidfile)
     elif args.action=='log':
         Log(args,logfile)
-    elif args.action=='statut':
+    elif args.action=='status':
         Statut(pidfile)

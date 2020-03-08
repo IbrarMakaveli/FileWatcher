@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "filewatcher"
 version = "1.0.0"
-description = "Projet de FileWatcher pour lancement lors de reception de fichier avec parametrages et configuration possible par fichier YAML"
+description = "FileWatcher project for launching when receiving a file with parameters and possible configuration by YAML file"
 
 keywords = [
         "filewatcher", 

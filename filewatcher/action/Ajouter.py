@@ -23,6 +23,6 @@ class Ajouter(object):
 
         parser_yaml.set_write_yaml(path_file_name,new_val)
 
-        logging.info('Ajout du chemin dans le filewatcher {}'.format(self.path_watch))
+        logging.info('Add new path to watch : {}'.format(self.path_watch))
         
         return True

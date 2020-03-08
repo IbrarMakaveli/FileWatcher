@@ -20,7 +20,7 @@ class Modifier(object):
         path_file_name = parser_yaml.normalize_path(self.path_watch)
 
         if path_file_name not in list_file:
-            logging.error("Ce chemin n'existe pas deja dans la config : {} | utiliser ajouter".format(self.path_watch))
+            logging.error("Path already exists : {} | use ajouter".format(self.path_watch))
             return False
 
         modif_val = parser_yaml.get_read_single_yaml(path_file_name)
@@ -36,6 +36,6 @@ class Modifier(object):
 
         parser_yaml.set_write_yaml(path_file_name,modif_val)
 
-        logging.info('Modification du chemin dans le filewatcher {}'.format(self.path_watch))
+        logging.info('Modify for path {}'.format(self.path_watch))
         
         return True

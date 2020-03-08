@@ -1,6 +1,6 @@
 import os, yaml, shutil
 
-print("[INFO] Installation de la config avec root path")
+print("[INFO] Install config with root path")
 root_path_project = os.path.dirname(os.path.abspath(__file__))
 yaml_file = os.path.join(root_path_project, "config.yaml")
 
@@ -16,15 +16,15 @@ list_doc['data']['path'] = os.path.join(root_path_project, "data")
 list_doc['pid']['path'] = os.path.join(root_path_project, "pid")
 
 if os.path.exists(list_doc['logs']['path'])==False:
-    print("[INFO] Creation du dossier logs")
+    print("[INFO] Create logs folder")
     os.mkdir(list_doc['logs']['path'])
 
 if os.path.exists(list_doc['data']['path'])==False:
-    print("[INFO] Creation du dossier data")
+    print("[INFO] Create data folder")
     os.mkdir(list_doc['data']['path'])
 
 if os.path.exists(list_doc['pid']['path'])==False:
-    print("[INFO] Creation du dossier pid")
+    print("[INFO] Create pid folder")
     os.mkdir(list_doc['pid']['path'])
 
 with open(yaml_file, "w") as f:

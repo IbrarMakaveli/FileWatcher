@@ -40,7 +40,6 @@ class FileHandle(object):
         if return_code==0:
             logging.info("Finish with SUCCESS, return code : {}".format(return_code))
         else:
-            logging.error(err)
             logging.error("Finish with ERROR, return code : {}".format(return_code))
         return True
 

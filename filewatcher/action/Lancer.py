@@ -68,12 +68,12 @@ class Lancer(Daemon):
                     self.init_launch(my_q_event,val['path_watch'])
                 list_path.append(val['path_watch'])
             else:
-                logging.error("Impossible de lire le chemin : {}".format(val))
+                logging.error("Unable to read path : {}".format(val))
 
         observer = Observer()
         
         for val in list_path:
-            logging.info("FileWatcher sur : {}".format(val))
+            logging.info("FileWatcher on : {}".format(val))
             observer.schedule(
                 EventHandlerQueue(my_q_event,val),
                 path=val)
@@ -89,7 +89,7 @@ class Lancer(Daemon):
         event = my_q_restart.get()
         my_q_restart.task_done()
         observer.stop()
-        logging.warning("Relance du file watcher : {}".format(event))
+        logging.warning("Restart of FileWatcher : {}".format(event))
         self.run_file_observe(True,my_q_event,my_q_restart)
         observer.join()
 
@@ -107,7 +107,7 @@ class Lancer(Daemon):
     def call_filecheck(self, my_q_event):
         while True:
             file_path, path_watch = my_q_event.get()
-            logging.info("Fichier trouve : {}".format(file_path))
+            logging.info("File found : {}".format(file_path))
 
             try:
                 ts_now = -1
@@ -116,7 +116,7 @@ class Lancer(Daemon):
                     time.sleep(2)
             except (OSError, ValueError, IOError) as e:
                 time.sleep(5)
-                logging.warning('Fichier disparu/renommer, tentative de relance | msg : {}'.format(e))
+                logging.warning('File diseaper/rename - try to relaunch | msg : {}'.format(e))
                 self.init_launch(my_q_event,path_watch)
                 continue
             except Exception as e:

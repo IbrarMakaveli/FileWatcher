@@ -29,9 +29,9 @@ class Daemon(object):
     def start(self):
         # if daemon is started throw an error
         if os.path.exists(self._pidfile):
-            print("[ERROR] FileWatcher est deja lancer")
+            print("[ERROR] FileWatcher is already start")
             exit(12)
-        print("[INFO] Demarrage du FileWatcher")
+        print("[INFO] Start of FileWatcher")
         # create and switch to daemon thread
         self._daemonize()
 
@@ -51,15 +51,15 @@ class Daemon(object):
 
             # kill daemon
             os.kill(pid, SIGTERM)
-            print("[INFO] FileWatcher s'est stoppe")
+            print("[INFO] FileWatcher is stop")
         else:
-            print("[WARNING] FileWatcher n'est pas demarre")
+            print("[WARNING] FileWatcher not started")
 
     def statut(self):
         if os.path.exists(self._pidfile):
-            print("[INFO] FileWatcher est lance")
+            print("[INFO] FileWatcher is already start")
         else:
-            print("[WARNING] FileWatcher n'est pas lance")
+            print("[WARNING] FileWatcher not started")
 
     def restart(self):
         self.stop()

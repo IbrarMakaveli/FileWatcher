@@ -10,9 +10,9 @@ class EventHandlerRestart(FileSystemEventHandler):
     def on_created(self, event):
         super(EventHandlerRestart, self).on_created(event)
         if event.is_directory==False:
-            self.queue.put('Ajout de filewatcher')
+            self.queue.put('Add to FileWatcher')
 
     def on_deleted(self, event):
         super(EventHandlerRestart, self).on_deleted(event)
         if event.is_directory==False:
-            self.queue.put('Suppression de filewatcher')
+            self.queue.put('Delete to Filewatcher')

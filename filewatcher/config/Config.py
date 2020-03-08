@@ -20,12 +20,12 @@ class Config(object):
         timewait=kwargs.get('timewait', None)
 
         if os.path.isdir(path_watch)==False:
-            logging.error("Chemin n'existe pas : {}".format(path_watch))
+            logging.error("Path not found : {}".format(path_watch))
             exit(12)
 
         if os.access(path_watch, os.R_OK)==False or os.access(path_watch, os.W_OK)==False or os.access(path_watch, os.X_OK)==False:
             username = getpass.getuser()
-            logging.error("Utilisateur '{}' n'a pas les droits (rwx) au chemin : {}".format(username,path_watch))
+            logging.error("User '{}' permission denied for path : {}".format(username,path_watch))
             exit(12)
         
         try:
@@ -40,7 +40,7 @@ class Config(object):
             if file_pattern is not None:
                 re.compile(file_pattern)
         except Exception as e:
-            logging.error("Format du regex incorrect (regex python sur google) : {}".format(file_pattern))
+            logging.error("Format regex incorrect (regex python sur google) : {}".format(file_pattern))
             logging.error(e)
             exit(12)
             
@@ -48,7 +48,7 @@ class Config(object):
             if min_size is not None:
                 humanfriendly.parse_size(min_size)
         except Exception as e:
-            logging.error("Format du minsize incorrect (B,KB,MB,GB,TB): {}".format(min_size))
+            logging.error("Format minsize incorrect (B,KB,MB,GB,TB): {}".format(min_size))
             logging.error(e)
             exit(12)
     

@@ -13,11 +13,11 @@ class Supprimer(object):
         path_file_name = parser_yaml.normalize_path(self.path_watch)
 
         if path_file_name not in list_file:
-            logging.error("Ce chemin n'existe pas deja dans la config : {}".format(self.path_watch))
+            logging.error("Path not found : {}".format(self.path_watch))
             return False
 
         os.remove(path_file_name)
-        logging.info('Suppression du chemin dans le filewatcher {}'.format(self.path_watch))
+        logging.info('Path is deleted in FileWatcher {}'.format(self.path_watch))
         return True
 
         
