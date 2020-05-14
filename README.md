@@ -1,6 +1,6 @@
 # FileWatcher
 
-[![PyPI pyversions](https://img.shields.io/badge/python-3.6-blue?style=flat-square&logo=visual-studio-code)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI pyversions](https://img.shields.io/badge/python-3.6-blue?style=flat-square)](https://pypi.python.org/pypi/ansicolortags/)
 
 FileWatcher to launch a bash command when receiving a file on a path with possible settings :
 - Minimum file size
