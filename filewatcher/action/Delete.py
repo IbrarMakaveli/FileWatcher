@@ -1,14 +1,13 @@
-import common.parser_yaml as parser_yaml
+from filewatcher.common import parser_yaml
 import logging, os
-from config.Config import Config
 
-class Supprimer(object):
+class Delete(object):
 
     def __init__(self,**kwargs):
         self.path_watch=kwargs.get('path_watch')
-        self.supp_val_yaml()
+        self.delete_val_yaml()
 
-    def supp_val_yaml(self,**kwargs):
+    def delete_val_yaml(self):
         list_file = parser_yaml.get_list_file_data()
         path_file_name = parser_yaml.normalize_path(self.path_watch)
 
@@ -19,5 +18,3 @@ class Supprimer(object):
         os.remove(path_file_name)
         logging.info('Path is deleted in FileWatcher {}'.format(self.path_watch))
         return True
-
-        

@@ -16,21 +16,21 @@ class FileHandle(object):
         self.run_check()
 
     def run_check(self):
-        logging.info("Demarrage du FileCheck config : {}".format(str(self.__dict__)))
+        logging.info("Starting FileCheck config : {}".format(str(self.__dict__)))
         is_checked = self.is_file_checked(self.path_file)
         if is_checked:
             self.run_command()
 
     def run_command(self):
         if self.timewait!="00:00:00":
-            logging.info("Attente pendant : {}".format(self.timewait))
+            logging.info("Waiting for : {}".format(self.timewait))
             h,m,s = self.timewait.split(':')
             time.sleep(int(datetime.timedelta(hours=int(h),minutes=int(m),seconds=int(s)).total_seconds()))
 
-        cmd_run_boa = shlex.split(self.command)
+        cmd_run = shlex.split(self.command)
         logging.info('Run command : {}'.format(self.command))
         try:
-            p = subprocess.Popen(cmd_run_boa, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(cmd_run, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = p.communicate()
             return_code = p.wait()
         except Exception as e:
@@ -44,11 +44,11 @@ class FileHandle(object):
         return True
 
     def is_file_checked(self,path_file):
-        file_size = os.stat(path_file).st_size 
+        file_size = os.stat(path_file).st_size
         if humanfriendly.parse_size(self.min_size) > file_size:
-            logging.warning("Taille du fichier trop petite par rapport au min_size : {}".format(self.min_size))
+            logging.warning("File size is smaller than min_size : {}".format(self.min_size))
             return False
         elif bool(re.search(self.file_pattern,path_file.split(os.path.sep)[-1]))==False:
-            logging.warning("Fichier ne match pas avec le pattern_file : {}".format(self.file_pattern))
+            logging.warning("File does not match the file_pattern : {}".format(self.file_pattern))
             return False
         return True

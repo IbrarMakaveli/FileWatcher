@@ -1,9 +1,8 @@
-import common.parser_yaml as parser_yaml
-import datetime
-import logging, os
-from config.Config import Config
+from filewatcher.common import parser_yaml
+import logging
+from filewatcher.config.Config import Config
 
-class Ajouter(object):
+class Add(object):
 
     def __init__(self,**kwargs):
         self.path_watch=kwargs.get('path_watch')
@@ -24,5 +23,5 @@ class Ajouter(object):
         parser_yaml.set_write_yaml(path_file_name,new_val)
 
         logging.info('Add new path to watch : {}'.format(self.path_watch))
-        
+
         return True

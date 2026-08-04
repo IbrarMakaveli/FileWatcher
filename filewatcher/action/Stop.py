@@ -1,4 +1,4 @@
-from common.Daemon import Daemon
+from filewatcher.common.Daemon import Daemon
 
 class Stop(Daemon):
 

@@ -32,7 +32,7 @@ class Config(object):
             if timewait is not None:
                 datetime.datetime.strptime(timewait, "%H:%M:%S")
         except Exception as e:
-            logging.error("Format timewait incorrect (HH:MM:SS) : {}".format(timewait))
+            logging.error("Incorrect timewait format (HH:MM:SS) : {}".format(timewait))
             logging.error(e)
             exit(12)
 
@@ -40,15 +40,15 @@ class Config(object):
             if file_pattern is not None:
                 re.compile(file_pattern)
         except Exception as e:
-            logging.error("Format regex incorrect (regex python sur google) : {}".format(file_pattern))
+            logging.error("Incorrect regex format (python regex) : {}".format(file_pattern))
             logging.error(e)
             exit(12)
-            
+
         try:
             if min_size is not None:
                 humanfriendly.parse_size(min_size)
         except Exception as e:
-            logging.error("Format minsize incorrect (B,KB,MB,GB,TB): {}".format(min_size))
+            logging.error("Incorrect minsize format (B,KB,MB,GB,TB) : {}".format(min_size))
             logging.error(e)
             exit(12)
     

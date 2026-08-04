@@ -1,8 +1,8 @@
-import common.parser_yaml as parser_yaml
-import logging, os
-from config.Config import Config
+from filewatcher.common import parser_yaml
+import logging
+from filewatcher.config.Config import Config
 
-class Modifier(object):
+class Modify(object):
 
     def __init__(self,**kwargs):
         self.path_watch=kwargs.get('path_watch')
@@ -20,7 +20,7 @@ class Modifier(object):
         path_file_name = parser_yaml.normalize_path(self.path_watch)
 
         if path_file_name not in list_file:
-            logging.error("Path already exists : {} | use ajouter".format(self.path_watch))
+            logging.error("Path not found : {} | use add".format(self.path_watch))
             return False
 
         modif_val = parser_yaml.get_read_single_yaml(path_file_name)
@@ -37,5 +37,5 @@ class Modifier(object):
         parser_yaml.set_write_yaml(path_file_name,modif_val)
 
         logging.info('Modify for path {}'.format(self.path_watch))
-        
+
         return True

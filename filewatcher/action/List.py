@@ -1,11 +1,9 @@
-import common.parser_yaml as parser_yaml
-import datetime
-import logging, os, pprint
+from filewatcher.common import parser_yaml
+import os
 from collections import OrderedDict
-from config.Config import Config
 from tabulate import tabulate
 
-class Lister(object):
+class List(object):
 
     def __init__(self,**kwargs):
         self.list_path_watch=kwargs.get('list_path_watch',None)
@@ -14,7 +12,7 @@ class Lister(object):
     def output_path_watch(self):
         list_file = parser_yaml.get_list_file_data()
         output_dataset = []
-        
+
         if self.list_path_watch is None:
             for path_file in list_file:
                 output_dataset.append(self.order_append_dict(path_file))
@@ -25,7 +23,7 @@ class Lister(object):
                 for path_file in list_file:
                     if path_file_name.replace(data_path,'').replace(os.path.sep,'') in path_file.replace(data_path,'').replace(os.path.sep,''):
                         output_dataset.append(self.order_append_dict(path_file))
-        
+
         print(tabulate(output_dataset, headers='keys', tablefmt='psql'))
 
 

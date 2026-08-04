@@ -1,10 +1,10 @@
-from common.Daemon import Daemon
+from filewatcher.common.Daemon import Daemon
 
-class Statut(Daemon):
+class Status(Daemon):
 
     def __init__(self,pid_file):
         Daemon.__init__(self, pid_file)
-        self.statut()
-        
+        self.status()
+
     def launch(self):
         pass
