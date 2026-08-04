@@ -1,9 +1,8 @@
-import yaml, os, logging, time
-from datetime import datetime
-from threading import RLock 
-from config.Config import Config
+import yaml, os
+from threading import RLock
+from filewatcher.config.Config import Config
 
-verrou = RLock()
+lock = RLock()
 config = Config().get_config()
 data_path_file = config['data']['path']
 
@@ -21,21 +20,21 @@ def get_read_yaml():
     data_in = []
 
     for val in list_file:
-        with verrou:
+        with lock:
             with open(val,'r') as f:
                 data_in.append(yaml.safe_load(f))
-    
+
     return data_in
 
 def get_read_single_yaml(path_file_name):
     val_yaml = False
-    with verrou:
+    with lock:
         with open(path_file_name,'r') as f:
             val_yaml = yaml.safe_load(f)
     return val_yaml
 
 def set_write_yaml(path_yaml,val_yaml):
-    with verrou:
+    with lock:
         with open(path_yaml,'w') as f:
             yaml.safe_dump(val_yaml, f)
     return True

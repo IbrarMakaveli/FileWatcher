@@ -1,14 +1,8 @@
-import tomlkit
-import os
+from importlib.metadata import PackageNotFoundError, version
 
+__project_name__ = "filewatcher"
 
-def __get_project_meta():
-    with open(os.path.dirname(__file__) + '/../pyproject.toml') as pyproject:
-        file_contents = pyproject.read()
-
-    return tomlkit.parse(file_contents)['tool']['poetry']
-
-
-__package_metadata__ = __get_project_meta()
-__version__ = __package_metadata__['version']
-__project_name__ = __package_metadata__['name']
+try:
+    __version__ = version(__project_name__)
+except PackageNotFoundError:
+    __version__ = "unknown"

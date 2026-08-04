@@ -1,6 +1,4 @@
-import datetime, subprocess
-import logging, os, pprint
-from config.Config import Config
+import subprocess
 
 class Log(object):
 
@@ -16,14 +14,15 @@ class Log(object):
                 with open('{}.{}'.format(self.logfile,self.date.strftime('%Y%m%d'))) as f:
                     print(f.read())
             except IOError:
-                print("[ERROR] Not log found for date {}".format(self.date.strftime('%Y-%m-%d')))
+                print("[ERROR] No log found for date {}".format(self.date.strftime('%Y-%m-%d')))
         elif self.all==True:
             with open(self.logfile) as f:
                 print(f.read())
         else:
-            f = subprocess.Popen(['tail','-F',self.logfile],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            f = subprocess.Popen(['tail','-F',self.logfile],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
             try:
                 while True:
                     print(f.stdout.readline().rstrip())
             except KeyboardInterrupt:
+                f.terminate()
                 print("[INFO] Exit keyboard log")

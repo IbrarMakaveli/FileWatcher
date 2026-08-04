@@ -1,15 +1,13 @@
-import os, yaml, shutil
+import os, yaml
 
 print("[INFO] Install config with root path")
 root_path_project = os.path.dirname(os.path.abspath(__file__))
 yaml_file = os.path.join(root_path_project, "config.yaml")
 
-list_doc = dict
-
 with open(yaml_file) as f:
     list_doc = yaml.safe_load(f)
 
-root_path_project = root_path_project.rsplit(os.path.sep, 1)[0] #retire le config de la fin
+root_path_project = root_path_project.rsplit(os.path.sep, 1)[0]  # strip the trailing 'config' directory
 list_doc['appPath'] = root_path_project
 list_doc['logs']['path'] = os.path.join(root_path_project, "logs")
 list_doc['data']['path'] = os.path.join(root_path_project, "data")

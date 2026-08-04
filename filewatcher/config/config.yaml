@@ -1,5 +1,5 @@
 appName: FileWatcher
-appPath: /mnt/c/Users/Ibrar/dev_project/FileWatcher/filewatcher
+appPath: ''
 args:
   default:
     minsize: 1B
@@ -7,13 +7,13 @@ args:
     timewait: 00:00:00
     worker: 10
 data:
-  path: /mnt/c/Users/Ibrar/dev_project/FileWatcher/filewatcher/data
+  path: ''
 logs:
-  defaultFile: filewatcher_deamon.log
+  defaultFile: filewatcher_daemon.log
   logFormat: '%Y-%m-%d %H:%M:%S'
   logLevel: INFO
   logMessage: '%(asctime)s [%(levelname)s] [%(threadName)s | %(funcName)s]  %(message)s'
-  path: /mnt/c/Users/Ibrar/dev_project/FileWatcher/filewatcher/logs
+  path: ''
 pid:
-  defaultFile: deamonrun.pid
-  path: /mnt/c/Users/Ibrar/dev_project/FileWatcher/filewatcher/pid
+  defaultFile: daemonrun.pid
+  path: ''
