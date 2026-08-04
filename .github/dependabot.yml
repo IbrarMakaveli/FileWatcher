@@ -4,3 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # tabulate >=0.10.0 requires Python >=3.10; remove once Python 3.9 support is dropped
+      - dependency-name: "tabulate"
+        versions: [">=0.10.0"]
